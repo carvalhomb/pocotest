@@ -174,66 +174,63 @@
 	</References>
 	<Files>
 		<Filter
-			Name="源文件"
-			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
-			>
-			<File
-				RelativePath=".\AutoPtrTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BufferTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ChecksumTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DynamicFactoryTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ErrorHandlingTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MemoryPoolTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\PocoTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\SharedPtrTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\SingletonTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\StringTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TypesTest.cpp"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="头文件"
+			Name="header"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 		</Filter>
 		<Filter
-			Name="资源文件"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			Name="src"
+			Filter="c;C;cc;cpp;CPP;c++;cxx;cp"
 			>
+			<File
+				RelativePath=".\src\AutoPtrTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\BufferTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ChecksumTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\DynamicFactoryTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ErrorHandlingTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\FormattingTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MemoryPoolTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\PocoTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SharedPtrTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SingletonTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StringTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\TypesTest.cpp"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
