@@ -53,3 +53,29 @@ TEST_F(StringTest, trim)
 	// FIXME: Debug Assertion failed!
 	// EXPECT_EQ(L"张岐文", Poco::trim(wstr2));
 }
+
+TEST_F(StringTest, caseConversion)
+{
+	EXPECT_EQ("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG", Poco::toUpper(str1));
+	EXPECT_EQ("the quick brown fox jumps over the lazy dog", Poco::toLower(str1));
+
+	Poco::toUpperInPlace(wstr1);
+	EXPECT_EQ(L"HELLO WORLD!  ", wstr1);
+}
+
+TEST_F(StringTest, CaseInsensitiveComparison)
+{
+	std::string iStr1 = Poco::toUpper(str1);
+	EXPECT_NE(iStr1, str1);
+	EXPECT_TRUE(Poco::icompare(str1, iStr1) == 0);
+}
+
+TEST_F(StringTest, Translation)
+{
+	//               "The quick brown fox jumps over the lazy dog"
+	std::string rs = "The quicb brevj fex jumps ever the lzxy deg";
+	EXPECT_EQ(rs, Poco::translate(str1, "aknowz", "zbjevx"));
+
+	Poco::translateInPlace(str1, "aknowz", "zbjevx");
+	EXPECT_EQ(rs, str1);
+}
