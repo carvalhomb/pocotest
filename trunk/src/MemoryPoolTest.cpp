@@ -35,5 +35,10 @@ TEST(MemoryPoolTest, all)
 
 	EXPECT_THROW({
 		struct Foo *buf5 = (struct Foo *) pool.get();
+		pool.release(buf5);
 	}, Poco::OutOfMemoryException);
+
+	pool.release(buf2);
+	pool.release(buf3);
+	pool.release(buf4);
 }
