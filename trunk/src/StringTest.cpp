@@ -79,3 +79,32 @@ TEST_F(StringTest, Translation)
 	Poco::translateInPlace(str1, "aknowz", "zbjevx");
 	EXPECT_EQ(rs, str1);
 }
+
+TEST_F(StringTest, SubstringReplace)
+{
+	// str1 = "The quick brown fox jumps over the lazy dog";
+	std::string retStr = Poco::replace(str1, "fox", "men");
+	EXPECT_EQ("The quick brown men jumps over the lazy dog", retStr);
+	EXPECT_EQ("The quick brown fox jumps over the lazy dog", str1);
+
+	// wstr1 = L"Hello World!  ";
+	Poco::replaceInPlace(wstr1, std::wstring(L"World"), std::wstring(L"China"));
+	EXPECT_EQ(L"Hello China!  ", wstr1);
+}
+
+TEST_F(StringTest, Concatenation)
+{
+	std::string catStr = Poco::cat(str1, str2, numStr);
+	EXPECT_EQ(str1 + str2 + numStr, catStr);
+
+	std::wstring wcatStr = Poco::cat(wstr1, wstr2);
+	EXPECT_EQ(wstr1 + wstr2, wcatStr);
+
+	std::vector<std::string> strVec;
+	strVec.push_back("kevin");
+	strVec.push_back("ning");
+	strVec.push_back("yeat");
+	strVec.push_back("duoyi");
+	std::string delimCatStr = Poco::cat(std::string(", "), strVec.begin(), strVec.end());
+	EXPECT_EQ("kevin, ning, yeat, duoyi", delimCatStr);
+}
