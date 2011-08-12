@@ -24,9 +24,9 @@ TEST(PlatformEnvironmentTest, Platform)
 	// do the ARM thing
 #endif
 
-#ifdef POCO_ARCH_LITTLE_ENDIAN
+#if defined(POCO_ARCH_LITTLE_ENDIAN)
 	// little endian
-#elif POCO_ARCH_BIG_ENDIAN
+#elif defined(POCO_ARCH_BIG_ENDIAN)
 	// big endian
 #endif
 
@@ -36,7 +36,11 @@ TEST(PlatformEnvironmentTest, Platform)
 TEST(PlatformEnvironmentTest, Environment)
 {
 	EXPECT_NO_THROW({
+#if defined(POCO_OS_FAMILY_WINDOWS)
 		std::string path = Poco::Environment::get("path");
+#elif defined(POCO_OS_FAMILY_UNIX)
+		std::string path = Poco::Environment::get("PATH");
+#endif
 		EXPECT_TRUE(path.length() != 0);
 	});
 
