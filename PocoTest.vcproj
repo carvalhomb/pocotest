@@ -212,7 +212,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\PlatformEnvironment.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\PocoTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\RegularExpressionTest.cpp"
 				>
 			</File>
 			<File
