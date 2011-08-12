@@ -35,13 +35,15 @@ TEST(PlatformEnvironmentTest, Platform)
 
 TEST(PlatformEnvironmentTest, Environment)
 {
-	EXPECT_NO_THROW({
+	std::string path;
 #if defined(POCO_OS_FAMILY_WINDOWS)
-		std::string path = Poco::Environment::get("path");
+	path = Poco::Environment::get("path");
 #elif defined(POCO_OS_FAMILY_UNIX)
-		std::string path = Poco::Environment::get("PATH");
+	path = Poco::Environment::get("PATH");
 #endif
-		EXPECT_TRUE(path.length() != 0);
+
+	EXPECT_NO_THROW({
+		EXPECT_FALSE(path.empty());
 	});
 
 	EXPECT_THROW({
