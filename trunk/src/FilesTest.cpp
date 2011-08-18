@@ -1,6 +1,11 @@
 #include <Poco/Platform.h>
-#include <Poco/Path.h>
 #include <Poco/Environment.h>
+#include <Poco/Path.h>
+#include <Poco/File.h>
+#include <Poco/Timestamp.h>
+#include <Poco/DirectoryIterator.h>
+#include <Poco/Glob.h>
+#include <Poco/TemporaryFile.h>
 
 #include <gtest/gtest.h>
 
@@ -109,6 +114,107 @@ TEST(FilesTest, PathFindTest)
 #if defined(POCO_OS_FAMILY_WINDOWS)
 	EXPECT_EQ("C:\\Windows\\system32\\cmd.exe", shellPath.toString());
 #elif defined(POCO_OS_FAMILY_UNIX)
-	EXPECT_EQ("/usr/bin/sh", shellPath.toString());
+	EXPECT_EQ("/bin/sh", shellPath.toString());
 #endif
+}
+
+TEST(FilesTest, FileTest)
+{
+	Poco::Path tmpPath(Poco::Path::temp());
+	tmpPath.pushDirectory("PocoFileSample");
+	Poco::File tmpDir(tmpPath);
+	tmpDir.createDirectories();
+
+	EXPECT_TRUE(tmpDir.exists());
+	EXPECT_FALSE(tmpDir.isFile());
+	EXPECT_TRUE(tmpDir.isDirectory());
+	EXPECT_TRUE(tmpDir.canRead());
+	EXPECT_TRUE(tmpDir.canWrite());
+
+	Poco::File tmpFile(Poco::Path(tmpPath, std::string("PocoFileSample.dat")));
+	if (tmpFile.createFile()) {
+		tmpFile.setSize(10000);
+		EXPECT_EQ((Poco::File::FileSize)10000, tmpFile.getSize());
+		Poco::File tmpFile2(Poco::Path(tmpPath, std::string("PocoFileSample2.dat")));
+		tmpFile.copyTo(tmpFile2.path());
+		EXPECT_EQ((Poco::File::FileSize)10000, tmpFile2.getSize());
+		Poco::Timestamp now;
+		tmpFile.setLastModified(now);
+		tmpFile.setReadOnly();
+		EXPECT_FALSE(tmpFile.canWrite());
+		tmpFile.setWriteable();
+		EXPECT_TRUE(tmpFile.canWrite());
+	}
+
+	std::vector<std::string> files;
+	tmpDir.list(files);
+	EXPECT_EQ(2, files.size());
+	EXPECT_EQ("PocoFileSample.dat", files[0]);
+	EXPECT_EQ("PocoFileSample2.dat", files[1]);
+	tmpDir.remove(true);
+	EXPECT_FALSE(tmpDir.exists());
+}
+
+TEST(FilesTest, DirectoryIteratorTest)
+{
+	std::string cwd(Poco::Path::current());
+	Poco::DirectoryIterator it(cwd);
+	Poco::DirectoryIterator end;
+	while (it != end) {
+//		std::cout << it.name();
+//		if (it->isFile())
+//			std::cout << it->getSize();
+//		std::cout << std::endl;
+//		Poco::Path p(it.path());
+		++it;
+	}
+}
+
+TEST(FilesTest, GlobTest)
+{
+	std::set<std::string> files;
+#if defined(POCO_OS_FAMILY_WINDOWS)
+	Poco::Glob::glob("%WINDIR%\\system32\\*.exe", files);
+#elif defined(POCO_OS_FAMILY_UNIX)
+	Poco::Glob::glob("/usr/include/*/*.h", files);
+#endif
+	std::set<std::string>::iterator it = files.begin();
+	for (; it != files.end(); ++it) {
+//		std::cout << *it << std::endl;
+	}
+}
+
+TEST(FilesTest, TemporaryFileTest)
+{
+	std::string pathStr;
+	std::string keepPathStr;
+
+	{
+		Poco::TemporaryFile tmp;
+		pathStr = tmp.path();
+
+		EXPECT_FALSE(tmp.exists());
+		tmp.createFile();
+		EXPECT_TRUE(tmp.exists());
+
+		Poco::File tmpFile(pathStr);
+		EXPECT_TRUE(tmpFile.exists());
+
+		Poco::TemporaryFile keepTmpFile;
+		keepPathStr = keepTmpFile.path();
+
+		EXPECT_FALSE(keepTmpFile.exists());
+		keepTmpFile.createFile();
+		EXPECT_TRUE(keepTmpFile.exists());
+
+		keepTmpFile.keepUntilExit();
+	}
+
+	// deleted
+	Poco::File file(pathStr);
+	EXPECT_FALSE(file.exists());
+
+	// not deleted until exit
+	Poco::File keepFile(keepPathStr);
+	EXPECT_TRUE(keepFile.exists());
 }
