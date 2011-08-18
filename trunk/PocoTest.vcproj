@@ -196,11 +196,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\DateTimeTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\DigestEngineTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\DynamicFactoryTest.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\ErrorHandlingTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\FilesTest.cpp"
 				>
 			</File>
 			<File
@@ -217,6 +229,10 @@
 			</File>
 			<File
 				RelativePath=".\src\PocoTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\RandomTest.cpp"
 				>
 			</File>
 			<File
