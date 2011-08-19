@@ -50,8 +50,9 @@ TEST_F(StringTest, trim)
 	EXPECT_EQ(trimedWStr, wstr1);
 	EXPECT_EQ(&trimedWStr, &wstr1);
 
-	// FIXME: Debug Assertion failed!
-	// EXPECT_EQ(L"张岐文", Poco::trim(wstr2));
+	// FIXED: Debug Assertion failed!
+	// Poco 1.4.1p1 fixed this bug
+	EXPECT_EQ(L"张岐文", Poco::trim(wstr2));
 }
 
 TEST_F(StringTest, caseConversion)
