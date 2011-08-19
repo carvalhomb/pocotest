@@ -60,7 +60,7 @@
 MY_CFLAGS =-I/usr/local/include/Poco -I/usr/local/include/Poco/Net -I/usr/local/include/Poco/Util -I/usr/local/include/Poco/XML -I/home/kevin/Development/gtest-1.6.0/include
 
 # The linker options.
-MY_LIBS   =-L/home/kevin/Development/gtest-1.6.0/make -lpthread -lgtest -lPocoFoundation -lPocoNet -lPocoUtil -lPocoXML
+MY_LIBS   =-L/home/kevin/Development/gtest-1.6.0/make -lpthread -lgtest -lPocoFoundationd -lPocoNetd -lPocoUtild -lPocoXMLd
 
 # The pre-processor options used by the cpp (man cpp for more).
 CPPFLAGS  = -Wall
