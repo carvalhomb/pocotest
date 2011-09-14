@@ -224,6 +224,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\NotificationCenterTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\NotificationQueueTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\PlatformEnvironment.cpp"
 				>
 			</File>
