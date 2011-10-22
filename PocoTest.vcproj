@@ -212,6 +212,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\EventTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\FilesTest.cpp"
 				>
 			</File>
@@ -253,6 +257,10 @@
 			</File>
 			<File
 				RelativePath=".\src\SingletonTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StreamTest.cpp"
 				>
 			</File>
 			<File
