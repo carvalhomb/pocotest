@@ -3,6 +3,7 @@
 #include <Poco/NumberParser.h>
 #include <Poco/StringTokenizer.h>
 #include <Poco/String.h>
+#include <Poco/Environment.h>
 
 #include <gtest/gtest.h>
 
@@ -37,10 +38,19 @@ TEST(FormattingTest, sprintfFormat)
 
 	EXPECT_EQ("  79", Poco::format("%4d", 79));
 	EXPECT_EQ("79  ", Poco::format("%-4d", 79));
-
-	EXPECT_THROW({
-		Poco::format("%s", 12);
-	}, Poco::BadCastException);
+	
+	Poco::UInt32 version143 = 0x01040300;
+	Poco::UInt32 versionCurrent = Poco::Environment::libraryVersion();
+	// Starting with release 1.4.3, an argument that does not match the format
+	// specifier no longer results in a BadCastException. The string [ERRFMT] is 
+	// written to the result string instead.
+	if (versionCurrent >= version143) {
+		EXPECT_EQ("[ERRFMT]", Poco::format("%s", 12));
+	} else {
+		EXPECT_THROW({
+			Poco::format("%s", 12);
+		}, Poco::BadCastException);
+	}
 }
 
 TEST(FormattingTest, NumberParser)
